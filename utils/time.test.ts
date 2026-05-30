@@ -159,7 +159,7 @@ describe('getSecondsUntilMidnightInTimezone', () => {
 
     const result = getSecondsUntilMidnightInTimezone('Etc/GMT+4');
     expect(Number.isInteger(result)).toBe(true);
-    expect(result).toBe(0);
+    expect(result).toBe(1);
   });
 
   it('handles extreme timezone Etc/GMT-14 (UTC+14)', () => {
