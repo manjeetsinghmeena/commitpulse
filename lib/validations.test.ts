@@ -663,6 +663,15 @@ describe('ogParamsSchema', () => {
     const result = ogParamsSchema.parse({});
     expect(result.user).toBe('unknown');
   });
+
+  it('should fallback to "dark" when an invalid theme is provided', () => {
+    const result = ogParamsSchema.safeParse({ theme: 'nonexistent_theme_name' });
+
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.theme).toBe('dark');
+    }
+  });
 });
 
 describe('streakParamsSchema — view fallback behavior', () => {
