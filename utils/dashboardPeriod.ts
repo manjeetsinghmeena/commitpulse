@@ -39,7 +39,8 @@ function addDaysUtc(date: Date, offset: number): Date {
 }
 
 function isValidIsoDate(value?: string): value is string {
-  return Boolean(value) && !Number.isNaN(Date.parse(value));
+  if (!value) return false;
+  return !Number.isNaN(Date.parse(value));
 }
 
 function toIsoDayStart(date: Date): string {
