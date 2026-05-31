@@ -56,37 +56,13 @@ describe('calculateStreak', () => {
 
   it('handles a massive single-day commit spike without affecting streak calculations', () => {
     const calendar = buildCalendar([
-      1,
-      0,
-      1,
-      0,
-      1,
-      0,
-      1,
+      1, 0, 1, 0, 1, 0, 1,
 
-      0,
-      0,
-      125,
-      0,
-      0,
-      0,
-      0,
+      0, 0, 125, 0, 0, 0, 0,
 
-      1,
-      1,
-      1,
-      1,
-      1,
-      0,
-      0,
+      1, 1, 1, 1, 1, 0, 0,
 
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
+      1, 1, 1, 1, 1, 1, 1,
     ]);
 
     const result = calculateStreak(calendar);
@@ -98,37 +74,13 @@ describe('calculateStreak', () => {
 
   it('handles multiple weeks of zero contributions separating active streaks', () => {
     const calendar = buildCalendar([
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
+      1, 1, 1, 1, 1, 1, 1,
 
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
+      0, 0, 0, 0, 0, 0, 0,
 
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
+      0, 0, 0, 0, 0, 0, 0,
 
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
+      1, 1, 1, 1, 1, 1, 1,
     ]);
 
     const result = calculateStreak(calendar);
@@ -434,17 +386,6 @@ describe('calculateStreak', () => {
   });
 });
 
-it('handles massive single-day commit spike timeline', () => {
-  const calendar = buildCalendar([
-    0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1,
-  ]);
-
-  const result = calculateStreak(calendar);
-
-  expect(result.currentStreak).toBe(7);
-  expect(result.longestStreak).toBe(7);
-});
-
 describe('calculateStreak — timezone awareness', () => {
   const tzCalendar = {
     totalContributions: 3,
@@ -666,8 +607,10 @@ describe('calculateMonthlyStats', () => {
     expect(result.previousMonthTotal).toBe(10);
     expect(result.currentMonthName).toBe('January');
   });
-  // ==================================================================  // ISSUE OBJECTIVE: Empty calendar passed to calculateMonthlyStats
-  // ==================================================================  it('returns zeros and does not crash when given an empty calendar', () => {
+  // ==================================================================
+  // ISSUE OBJECTIVE: Empty calendar passed to calculateMonthlyStats
+  // ==================================================================
+  it('returns zeros and does not crash when given an empty calendar', () => {
     const emptyCalendar = {
       totalContributions: 0,
       weeks: [],
@@ -717,8 +660,10 @@ describe('calculateStreak — empty and sparse year edge cases', () => {
     expect(result.totalContributions).toBe(2);
   });
 
-  // ==================================================================  // ISSUE #1503 — Variation 4: Full year (52 weeks × 7 days) of 0 contributions
-  // ==================================================================  // Background: streak computation is susceptible to off-by-one errors when
+  // ==================================================================
+  // ISSUE #1503 — Variation 4: Full year (52 weeks × 7 days) of 0 contributions
+  // ==================================================================
+  // Background: streak computation is susceptible to off-by-one errors when
   // managing calendar offsets and date boundaries. A full year of zero commits
   // is the most exhaustive boundary stress-test: the loop must traverse all 364
   // days without incrementing either streak counter, and must not throw or return
@@ -911,7 +856,8 @@ describe('calculateWrappedStats', () => {
   });
 
   // ISSUE OBJECTIVE: Verify weekendRatio is 100 when all commits are on weekends
-  // ==================================================================  it('returns weekendRatio === 100 when all contributions are on weekends', () => {
+  // ==================================================================
+  it('returns weekendRatio === 100 when all contributions are on weekends', () => {
     // Note: 2026-05-02 is a Saturday, 2026-05-03 is a Sunday, 2026-05-04 is a Monday
     const weekendCalendar = {
       totalContributions: 10,
