@@ -1702,6 +1702,22 @@ describe('validateGitHubUsername', () => {
   it('returns false for a username with underscore', () => {
     expect(validateGitHubUsername('invalid_username')).toBe(false);
   });
+
+  it('returns false for empty string', () => {
+    expect(validateGitHubUsername('')).toBe(false);
+  });
+
+  it('returns false for leading hyphen', () => {
+    expect(validateGitHubUsername('-octocat')).toBe(false);
+  });
+
+  it('returns false for trailing hyphen', () => {
+    expect(validateGitHubUsername('octocat-')).toBe(false);
+  });
+
+  it('returns false for consecutive hyphens', () => {
+    expect(validateGitHubUsername('octo--cat')).toBe(false);
+  });
 });
 describe('cacheKey', () => {
   it('creates key without year', () => {
