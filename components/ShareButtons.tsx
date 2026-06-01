@@ -5,10 +5,7 @@ interface ShareButtonsProps {
   title?: string;
 }
 
-export default function ShareButtons({
-  url,
-  title = '',
-}: ShareButtonsProps) {
+export default function ShareButtons({ url, title = '' }: ShareButtonsProps) {
   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
     url
   )}`;
